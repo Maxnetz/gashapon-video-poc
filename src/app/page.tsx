@@ -80,7 +80,7 @@ export default function Home() {
 
 				{/* Kwenchana Video */}
 				<video
-					preload="metadata"
+					preload="auto"
 					ref={kwenchanaVideoRef}
 					src="/kwenchana.mp4"
 					className="w-full h-screen"
