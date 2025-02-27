@@ -82,7 +82,7 @@ export default function Home() {
 				<video
 					preload="auto"
 					ref={kwenchanaVideoRef}
-					src="/kwenchana.mp4"
+					src="/kwenchana.MP4"
 					className="w-full h-screen"
 					hidden={!isFirstVideoPlayed}
 					onEnded={handleSecondVideoEnd}

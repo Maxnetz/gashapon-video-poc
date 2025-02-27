@@ -27,7 +27,7 @@ export default function RootLayout({
 		<html lang="en">
 			<head>
 				<link rel="preload" href="/opening-capsule-animation.mp4" as="video" />
-				<link rel="preload" href="/kwenchana.mp4" as="video" />
+				<link rel="preload" href="/kwenchana.MP4" as="video" />
 			</head>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
 		</html>
