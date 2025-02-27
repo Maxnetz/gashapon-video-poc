@@ -86,7 +86,7 @@ export default function Home() {
 					className="absolute w-full h-full bg-gray-700"
 					style={{ transformOrigin: 'center' }}
 				>
-					content text
+					content
 				</motion.div>
 
 				{/* Opening Capsule Animation */}
