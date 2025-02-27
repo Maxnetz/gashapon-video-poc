@@ -9,6 +9,7 @@ export default function Home() {
 	const openingVideoRef = useRef<HTMLVideoElement | null>(null)
 	const kwenchanaVideoRef = useRef<HTMLVideoElement | null>(null)
 	const [isZoomed, setIsZoomed] = useState(false)
+	const [isSkipButtonClicked, setIsSkipButtonClicked] = useState(false)
 
 	useEffect(() => {
 		const video = openingVideoRef.current
@@ -37,10 +38,12 @@ export default function Home() {
 	}
 
 	const handleSkipScene = () => {
-		if (openingVideoRef.current) {
-			openingVideoRef.current.currentTime = openingVideoRef.current.duration - 1
-			openingVideoRef.current.play()
+		if (kwenchanaVideoRef.current) {
+			kwenchanaVideoRef.current.currentTime = kwenchanaVideoRef.current.duration - 1
+			kwenchanaVideoRef.current.play()
 		}
+
+		setIsSkipButtonClicked(true)
 	}
 
 	const handleFirstVideoEnd = () => {
@@ -59,14 +62,32 @@ export default function Home() {
 
 	return (
 		<>
+			<div className="w-full flex justify-between">
+				<button
+					onClick={handlePlayVideo}
+					className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all"
+				>
+					Open
+				</button>
+				{kwenchanaVideoRef.current && !isSkipButtonClicked ? (
+					<button
+						onClick={handleSkipScene}
+						className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all"
+					>
+						Skip Scene
+					</button>
+				) : null}
+			</div>
 			<div className="relative">
 				<motion.div
-					initial={{ scale: 0 }}
-					animate={isSecondVideoPlayed ? { scale: 1 } : {}}
+					initial={{ scale: 0, opacity: 0 }}
+					animate={isSecondVideoPlayed ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
 					transition={{ duration: 1, ease: 'easeInOut' }}
-					className={`absolute w-full h-full bg-gray-700 transition-opacity duration-500 ${isSecondVideoPlayed ? 'opacity-100' : 'opacity-0'}`}
+					className="absolute w-full h-full bg-gray-700"
 					style={{ transformOrigin: 'center' }}
-				/>
+				>
+					content text
+				</motion.div>
 
 				{/* Opening Capsule Animation */}
 				{!isFirstVideoPlayed && (
@@ -87,20 +108,6 @@ export default function Home() {
 					hidden={!isFirstVideoPlayed}
 					onEnded={handleSecondVideoEnd}
 				/>
-			</div>
-			<div className="w-full flex justify-between">
-				<button
-					onClick={handlePlayVideo}
-					className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all"
-				>
-					Open
-				</button>
-				<button
-					onClick={handleSkipScene}
-					className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all"
-				>
-					Skip Scene
-				</button>
 			</div>
 		</>
 	)
